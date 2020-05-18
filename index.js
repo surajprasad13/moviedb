@@ -114,7 +114,7 @@ $(document).ready(function() {
             const movies = data.results;
             const movieBlock = createMovieContainer(movies);
             $('.content').html(movieBlock);
-            console.
+            console.log();
 
         })
 
