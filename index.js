@@ -7,9 +7,6 @@ $(document).ready(function() {
     const upcoming = "https://api.themoviedb.org/3/movie/upcoming?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US&page=1";
     const toprated = "https://api.themoviedb.org/3/movie/top_rated?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US&page=1";
     const detail = "https://api.themoviedb.org/3/movie/640344?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US";
-
-
-
     //trending values
 
     function movieSection(movies) {
