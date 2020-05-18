@@ -1,0 +1,1 @@
+const MOVIE_DB_API = 'f322b9b92569cc1303fde9c344d90d40';
