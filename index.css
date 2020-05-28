@@ -7,124 +7,96 @@
 
 }
 
-body {
-    width: 100%;
-}
+body {}
 
-header {
-    font-family: 'Bonbon', cursive;
-    background-color: #b300b3;
-    color: white;
-    overflow: hidden;
-}
-
-h1 {
-    font-family: 'Iceland', cursive;
-    padding: 30px;
-    float: left;
+ol {
+    padding-inline-start: 0px;
+    display: grid;
+    gap: 10px 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    background-color: rgba(20, 187, 187, .9);
 
 }
 
-.container {
-    margin-top: 20px;
-    margin: auto;
-    width: 100%;
-
-
-}
-
-
-form {
-    margin-top: 30px;
-}
-
-input {
-    width: 500px;
-    height: 50px;
-    text-align: center;
-    outline: none;
-    border-radius: 10px;
-    border-bottom: 5px solid #3377ff;
-    transition: width 2s linear 1s;
-    box-shadow: 6px 6px 3px grey;
-}
-
-input:hover {
-    width: 600px;
-    background-color: #3377ff;
-    color: white;
-    border-radius: 10px;
-    border-bottom: 4px solid purple;
-}
-
-::placeholder {
-    font-size: 20px;
-
-}
-
-
-.searchresult {
-    margin-bottom: 20px;
-}
-
-.trending {
-    background-color: #e699ff;
-
-}
-
-.movie {
-    width:
-}
-
-section {
-    height: 300px;
-    position: relative;
-    width: 100%;
-    margin-top: px;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    transition: 250ms all;
-
+li {
+    list-style: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgba(138, 43, 179, 0.9);
+    color: whitesmoke;
 }
 
 img {
-    border-radius: 2px;
-    height: 250px;
-    cursor: pointer;
-
+    height: 300px;
+    z-index: 20px;
 }
 
-img:hover {
-    transform: scale(1.1);
+.container {
+    padding: 2px 16px;
 }
 
-
-.upcoming {
-    margin-top: 20px;
+.popup {
+    top: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    opacity: .95;
 }
 
-
-.toprated {
-    margin-top: 20px;
-}
-
-footer {
-    text-align: center;
-    bottom: 0;
-    padding: 30px;
-    width: 100%;
-    background-color: #8600b3;
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
     color: white;
-    font-size: 2em;
-}
-.content{
-	border:2px solid red;
-	height: 200px;
-	display: none;
 }
 
-.content-display{
-	display: block;
+/* Modal Body */
+.modal-body {
+    height: 100vh;
+    width: 100vw;
+    background: transparent;
+    background-color: rgb(34, 87, 202);
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: absolute;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0.5
+    }
+
+    to {
+        top: 0;
+        opacity: .9
+    }
+}
+
+
+
+.close {
+    float: right;
+    cursor: pointer;
+    color: red;
+    font-size: large;
+    margin:40px 50px;
 }
