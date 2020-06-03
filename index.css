@@ -92,16 +92,16 @@ h1 {
 #list,
 #upcoming-container,
 #top-trending {
-    padding-inline-start: 0px;
+    padding: 10px;
     display: grid;
-    gap: 5px 5px;
+    gap: 10px 10px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 li {
     list-style: none;
     border-radius: 10px;
-    background-color: rgba(138, 43, 179, 0.9);
+    background:linear-gradient(to right, #43cea2, #185a9d);
     color: whitesmoke;
 }
 
@@ -122,6 +122,7 @@ li>img {
     height: 100vh;
     width: 100%;
     opacity: .95;
+    transition: roll ease-in-out 2s;
 }
 
 
