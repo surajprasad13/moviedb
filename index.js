@@ -9,32 +9,16 @@ const detail = `https://api.themoviedb.org/3/movie/640344?api_key=${apikey}&lang
 // search movie here.........
 const form = document.querySelector("form");
 const input = document.querySelector("input");
+const displaySearch = document.getElementById("searchDiv");
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const inputValue = input.value;
   const searchMovie = async () => {
     const res = await fetch(search + `${inputValue}`);
     const data = await res.json();
-    displaySearch(data.results);
+    displaySearch.innerHTML = displayMovie(data.results);
   };
-
-  const displaySearch = (movie) => {
-    const displaySearch = document.getElementById("searchDiv");
-    const html = movie
-      .map(
-        (result) => `<li onclick="selectMovie(${result.id})">
-         <img src="${poster}${result.poster_path}" alt="movie poster">
-         <div class="container">
-         <h4><b>Rating:<i class="fas fa-star"></i>
-         ${result.vote_average}</b></h4>
-         <p>Release Date:${result.release_date}</p>
-         </div>
-         </li>`
-      )
-      .join("");
-    displaySearch.innerHTML = html;
-  };
-
   searchMovie();
   input.value = "";
 });
@@ -46,21 +30,18 @@ const trendingUrl = async () => {
   const res = await fetch(trending);
   const data = await res.json();
   const movie = data.results;
-  console.log(movie)
   movieList.innerHTML = displayMovie(movie);
 };
 
 //upcoming movies
 
-const upcomingMovie=document.getElementById("upcoming-container");
+const upcomingMovie = document.getElementById("upcoming-container");
 const upcomingUrl = async () => {
   const res = await fetch(upcoming);
   const data = await res.json();
   const movie = data.results;
   upcomingMovie.innerHTML = displayMovie(movie);
 };
-
-
 
 // top trending movies
 const toptrendingMovie = document.getElementById("top-trending");
@@ -72,21 +53,17 @@ const toptrendingUrl = async () => {
   toptrendingMovie.innerHTML = displayMovie(movie);
 };
 
-
-
 //display movie
 const displayMovie = (movie) => {
   return movie
-    .map(
-      (result) => `<li onclick="selectMovie(${result.id})">
-  <img src="${poster}${result.poster_path}" alt="Avatar" style="width:100%">
-  <div class="container">
-    <h4><b>Rating:<i class="fas fa-star"></i>
-    ${result.vote_average}</b></h4>
-    <p>Release Date:${result.release_date}</p>
-  </div>
-</li>`
-    )
+    .map((result) => {
+      if (result.poster_path) {
+        return `<li onclick="selectMovie(${result.id})">
+         <img src="${poster}${result.poster_path}" alt="Avatar">
+         <div class="container"><h4><b>Rating:<i class="fas fa-star"></i>${result.vote_average}</b></h4>
+           <p>Release Date:${result.release_date}</p> </div></li>`;
+      }
+    })
     .join("");
 };
 
