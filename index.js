@@ -16,7 +16,6 @@ form.addEventListener("submit", (event) => {
     const res = await fetch(search + `${inputValue}`);
     const data = await res.json();
     displaySearch(data.results);
-    console.log(data.results);
   };
 
   const displaySearch = (movie) => {
