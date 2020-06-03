@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>Movie App</title>
         <link rel="stylesheet" type="text/css" href="index.css">
+        <script src="https://kit.fontawesome.com/58b2a71ee2.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
+
     <body>
-    
-<ol id="list">
-    
-</ol>
+        <div class="topnav">
+            <a class="active" href="#home">Movie App</a>
+            <a href="#about">Movie</a>
+            <a href="#contact">Tv Series</a>
+            <a href="#contact">Anime</a>
 
+            <div class="search-container">
+                <form>
+                    <input type="search" placeholder="Search Movie.." name="search">
+                </form>
+            </div>
+        </div>
+        <!--search movie result-->
+        <div id="searchDiv">
+        </div>
 
+        <!--trending movies-->
+        <h1>Trending Movies</h1>
+        <div id="list">
+        </div>
+
+        <!--upcoming movies-->
+        <h1>Upcoming Movies</h1>
+        <div id="upcoming-container">
+        </div>
+
+        <!--Top trending movies-->
+        <h1>Top-trending Movies</h1>
+        <div id="top-trending">
+        </div>
+
+        <footer>
+            This is made with <i class="fas fa-heart"></i> by SURAJ RASAD
+        </footer>
         <script type="text/javascript" src="index.js"></script>
     </body>
+
 </html>

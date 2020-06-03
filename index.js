@@ -1,48 +1,98 @@
 const apikey = "f322b9b92569cc1303fde9c344d90d40";
-const search =
-  "https://api.themoviedb.org/3/search/movie?api_key=f322b9b92569cc1303fde9c344d90d40&query=";
-const poster = "https://image.tmdb.org/t/p/w200";
-const trending =
-  "https://api.themoviedb.org/3/trending/all/week?api_key=f322b9b92569cc1303fde9c344d90d40";
-const upcoming =
-  "https://api.themoviedb.org/3/movie/upcoming?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US&page=1";
-const toprated =
-  "https://api.themoviedb.org/3/movie/top_rated?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US&page=1";
-const detail =
-  "https://api.themoviedb.org/3/movie/640344?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US";
+const search = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=`;
+const poster = `https://image.tmdb.org/t/p/w500`;
+const trending = `https://api.themoviedb.org/3/trending/all/week?api_key=${apikey}`;
+const upcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=1`;
+const toprated = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=1`;
+const detail = `https://api.themoviedb.org/3/movie/640344?api_key=${apikey}&language=en-US`;
+
+// search movie here.........
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const inputValue = input.value;
+  const searchMovie = async () => {
+    const res = await fetch(search + `${inputValue}`);
+    const data = await res.json();
+    displaySearch(data.results);
+    console.log(data.results);
+  };
+
+  const displaySearch = (movie) => {
+    const displaySearch = document.getElementById("searchDiv");
+    const html = movie
+      .map(
+        (result) => `<li onclick="selectMovie(${result.id})">
+         <img src="${poster}${result.poster_path}" alt="movie poster">
+         <div class="container">
+         <h4><b>Rating:<i class="fas fa-star"></i>
+         ${result.vote_average}</b></h4>
+         <p>Release Date:${result.release_date}</p>
+         </div>
+         </li>`
+      )
+      .join("");
+    displaySearch.innerHTML = html;
+  };
+
+  searchMovie();
+  input.value = "";
+});
+
 //trending values
 
 const movieList = document.getElementById("list");
-
-const fetchUrl = async () => {
-  const url =
-    "https://api.themoviedb.org/3/trending/all/week?api_key=f322b9b92569cc1303fde9c344d90d40";
-
-  const res = await fetch(url);
+const trendingUrl = async () => {
+  const res = await fetch(trending);
   const data = await res.json();
   const movie = data.results;
-  console.log(data);
-  displayMovie(movie);
+  console.log(movie)
+  movieList.innerHTML = displayMovie(movie);
 };
 
+//upcoming movies
+
+const upcomingMovie=document.getElementById("upcoming-container");
+const upcomingUrl = async () => {
+  const res = await fetch(upcoming);
+  const data = await res.json();
+  const movie = data.results;
+  upcomingMovie.innerHTML = displayMovie(movie);
+};
+
+
+
+// top trending movies
+const toptrendingMovie = document.getElementById("top-trending");
+
+const toptrendingUrl = async () => {
+  const res = await fetch(upcoming);
+  const data = await res.json();
+  const movie = data.results;
+  toptrendingMovie.innerHTML = displayMovie(movie);
+};
+
+
+
+//display movie
 const displayMovie = (movie) => {
-  const html = movie
+  return movie
     .map(
       (result) => `<li onclick="selectMovie(${result.id})">
-
-  <img src="https://image.tmdb.org/t/p/w200${result.poster_path}" alt="Avatar" style="width:100%">
+  <img src="${poster}${result.poster_path}" alt="Avatar" style="width:100%">
   <div class="container">
-    <h4><b>Rating:${result.vote_average}</b></h4>
+    <h4><b>Rating:<i class="fas fa-star"></i>
+    ${result.vote_average}</b></h4>
     <p>Release Date:${result.release_date}</p>
   </div>
 </li>`
     )
     .join("");
-  movieList.innerHTML = html;
 };
 
 const selectMovie = async (id) => {
-  const detail = `https://api.themoviedb.org/3/movie/${id}?api_key=f322b9b92569cc1303fde9c344d90d40&language=en-US`;
+  const detail = `https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}&language=en-US`;
   const res = await fetch(detail);
   const data = await res.json();
   displayPopup(data);
@@ -50,23 +100,17 @@ const selectMovie = async (id) => {
 
 const displayPopup = (data) => {
   const html = `<div class="popup">
-  <div class="modal-content">
-  <div class="modal-header">
+    <div class="modal-content">
     <span class="close" onclick="closePopup()">&times;</span>
-    <h2>Modal Header</h2>
-  </div>
-  <div class="modal-body">
-    <img src="https://image.tmdb.org/t/p/w200${data.backdrop_path}"/>
+   <div class="modal-body">
+    <img src="${poster}${data.backdrop_path}"/>
     <p>Some other text...${data.id}</p>
+   </div>
   </div>
-  <div class="modal-footer">
-    <h3>Modal Footer</h3>
   </div>
-</div></div>
   `;
 
-movieList.innerHTML=html+movieList.innerHTML
-
+  movieList.innerHTML = html + movieList.innerHTML;
 };
 
 const closePopup = () => {
@@ -74,4 +118,6 @@ const closePopup = () => {
   popup.parentElement.removeChild(popup);
 };
 
-fetchUrl();
+trendingUrl();
+upcomingUrl();
+toptrendingUrl();
