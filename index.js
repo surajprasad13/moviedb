@@ -74,6 +74,8 @@ const selectMovie = async (id) => {
   displayPopup(data);
 };
 
+//display popup....................
+
 const displayPopup = (data) => {
   const html = `<div class="popup">
     <div class="modal-content">
@@ -88,6 +90,8 @@ const displayPopup = (data) => {
 
   movieList.innerHTML = html + movieList.innerHTML;
 };
+
+//close popup.......................
 
 const closePopup = () => {
   const popup = document.querySelector(".popup");
