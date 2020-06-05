@@ -101,7 +101,7 @@ h1 {
 li {
     list-style: none;
     border-radius: 10px;
-    background:linear-gradient(to right, #43cea2, #185a9d);
+    background: linear-gradient(to right, #43cea2, #185a9d);
     color: whitesmoke;
 }
 
@@ -121,48 +121,27 @@ li>img {
     top: 0;
     left: 0;
     position: fixed;
-    height: 100vh;
+    height:;
     width: 100%;
+    background: linear-gradient(to right, white, green);
     opacity: .95;
-    transition: roll ease-in-out 2s;
 }
 
 
-/* Modal Body */
-.modal-body {
+.popup img{
+    width: 65vmin;
+}
+
+.detail-container {
+    overflow-y: auto;
     height: 100vh;
-    width: 100%;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
-
-/* Modal Content */
-.modal-content {
-    position: absolute;
-    color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
+#detaildiv{
+    text-align: center;
+    padding: 20px;
 }
-
-/* Add Animation */
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0.5
-    }
-
-    to {
-        top: 0;
-        opacity: .9
-    }
-}
-
-
-
 .close {
     float: right;
     cursor: pointer;

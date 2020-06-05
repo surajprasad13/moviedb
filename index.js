@@ -1,6 +1,6 @@
 const apikey = "f322b9b92569cc1303fde9c344d90d40";
 const search = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=`;
-const poster = `https://image.tmdb.org/t/p/w500`;
+const poster = `https://image.tmdb.org/t/p/w400`;
 const trending = `https://api.themoviedb.org/3/trending/all/week?api_key=${apikey}`;
 const upcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=1`;
 const toprated = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=1`;
@@ -17,6 +17,7 @@ form.addEventListener("submit", (event) => {
   const searchMovie = async () => {
     const res = await fetch(search + `${inputValue}`);
     const data = await res.json();
+    console.log(data.results);
     displaySearch.innerHTML = displayMovie(data.results);
   };
   searchMovie();
@@ -58,7 +59,7 @@ const displayMovie = (movie) => {
   return movie
     .map((result) => {
       if (result.poster_path) {
-        return `<li onclick="selectMovie(${result.id})">
+        return `<li onclick="selectMovie(${result.id}),getVideo(${result.id})">
          <img src="${poster}${result.poster_path}" alt="Avatar">
          <div class="container"><h4><b>Rating:<i class="fas fa-star"></i>${result.vote_average}</b></h4>
            <p>Release Date:${result.release_date}</p> </div></li>`;
@@ -77,18 +78,50 @@ const selectMovie = async (id) => {
 //display popup....................
 
 const displayPopup = (data) => {
-  const html = `<div class="popup">
-    <div class="modal-content">
-    <span class="close" onclick="closePopup()">&times;</span>
-   <div class="modal-body">
-    <img src="${poster}${data.backdrop_path}"/>
-    <p>Some other text...${data.id}</p>
-   </div>
-  </div>
-  </div>
-  `;
+  const {
+    title,
+    backdrop_path,
+    poster_path,
+    vote_average,
+    overview,
+    release_date,
+  } = data;
 
+  const html = `
+        <div class="popup">
+        <div class="detail-container">
+        <div>
+        <img src="${poster}${poster_path}" />
+        </div>
+        <div id="detaildiv">
+        <span class="close" onclick="closePopup()">&times;</span>
+         <p>${title}</p>
+         <p>Release-Date-${release_date}</p>
+         <p><i class="fas fa-star">Rating</i>&nbsp;${vote_average}</p>
+         <p><h3>Overview</h3>${overview}</p>
+         </div>
+        </div>
+        </div>
+  `;
   movieList.innerHTML = html + movieList.innerHTML;
+};
+
+const getVideo = async (id) => {
+  const video = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apikey}&language=en-US`;
+  const res = await fetch(video);
+  const data = await res.json();
+  console.log(data.results);
+  displayVideo(data.results);
+};
+
+const displayVideo = (data) => {
+  return data
+    .map((result) => {
+      return `<div class="video">
+      <span class="close" onclick="closePopup()">&times;</span>
+    <iframe src="https://www.youtube.com/embed/${result.key}?controls=0"></iframe></div>`;
+    })
+    .join("");
 };
 
 //close popup.......................
